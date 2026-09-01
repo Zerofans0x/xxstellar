@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
 
     // --- RISK/TIER CLASSIFICATION ---
     tier: {
-        level: { type: String, enum: ['standard', 'premium', 'institutional', 'null'], default: 'null' },
+        level: { type: String, enum: ['standard', 'premium','growth-tier', 'institutional', 'null'], default: 'null' },
         status: { type: String, enum: ['active', 'expired', 'cancelled', 'inactive', 'pending'], default: 'inactive' },
         startDate: { type: Date },
         expiryDate: { type: Date },

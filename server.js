@@ -26,12 +26,10 @@ const startServer = async () => {
 
         // --- API Route Imports ---
         const authRoutes = require('./routes/authRoutes');
-        const psycheRoutes = require('./routes/psycheRoutes');  
-        const publicRoutes = require('./routes/publicRoutes');
-        const adminCourseRoutes = require('./routes/admin/adminCourseRoutes');
-        const adminRoutes = require('./routes/admin/adminRoutes');
-        const adminCertificateRoutes = require('./routes/admin/adminCertificateRoutes');
-        const adminModerationRoutes = require('./routes/admin/adminModerationRoutes');
+        const psycheRoutes = require('./routes/psycheRoutes'); 
+        const paymentRoutes = require('./routes/paymentRoutes'); 
+        // const adminRoutes = require('./routes/admin/adminRoutes');
+        // const adminModerationRoutes = require('./routes/admin/adminModerationRoutes');
 
         const app = express();
         const server = http.createServer(app);
@@ -149,11 +147,9 @@ const startServer = async () => {
         app.use('/api/v1', globalLimiter);
         app.use('/api/v1/auth', authRoutes);
         app.use('/api/v1/psyche', psycheRoutes);
-        app.use('/api/v1/admin', adminRoutes);
-        app.use('/api/v1/admin', adminCourseRoutes);
-        app.use('/api/v1/admin/certificates', adminCertificateRoutes);
-        app.use('/api/v1/admin/moderation', adminModerationRoutes);
-        app.use('/api/v1/public', publicRoutes);
+        app.use('/api/v1/payment', paymentRoutes);
+        // app.use('/api/v1/admin', adminRoutes);
+        // app.use('/api/v1/admin/moderation', adminModerationRoutes);
         app.use(notFound);
         // middleware/errorMiddleware.js (or inside server.js)
 
