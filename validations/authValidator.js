@@ -32,19 +32,15 @@ const validateRegister = [
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
         .withMessage('Password must contain at least one uppercase letter, one lowercase letter, and one number.'),
 
-    body('intent')
+        body('intent')
         .optional()
-        .isIn(['trader']).withMessage('Invalid user intent.'),
+        .isIn(['investor', 'institutional', 'trader']).withMessage('Invalid user intent.'),  
 
     body('referralCode')
         .optional()
         .trim()
         .escape(),
 
-    // 🟢 ADDED: Allow playerId to pass through validation
-    body('playerId')
-        .optional()
-        .isString().withMessage('Player ID must be a string.'),
 
     handleValidationErrors
 ];
