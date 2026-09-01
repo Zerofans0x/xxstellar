@@ -92,7 +92,7 @@ const startServer = async () => {
 
         const allowedOrigins = [
             'http://localhost:5173',
-            process.env.PSYCHE_FRONTEND_URL
+            process.env.MYSTELLARTERM_FRONTEND_URL
         ];
 
         app.use(cors({
