@@ -91,7 +91,7 @@ const startServer = async () => {
         app.use(morgan('combined', { stream: { write: (msg) => logger.info(msg.trim()) } }));
 
         const allowedOrigins = [
-            'http://localhost:5173',
+            'http://localhost:3000',
             process.env.MYSTELLARTERM_FRONTEND_URL
         ];
 
