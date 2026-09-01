@@ -39,9 +39,11 @@ const UserSchema = new mongoose.Schema({
     status: { type: String, enum: ['active', 'inactive', 'suspended'], default: 'active' },
     deletionReason: { type: String },
 
+  
     // --- RISK/TIER CLASSIFICATION ---
     tier: {
-        level: { type: String, enum: ['standard', 'premium','growth-tier', 'institutional', 'null'], default: 'null' },
+        // Unified the enums to strictly match your system slugs
+        level: { type: String, enum: ['starter-tier', 'growth-tier', 'executive-tier', 'institutional', 'null'], default: 'null' },
         status: { type: String, enum: ['active', 'expired', 'cancelled', 'inactive', 'pending'], default: 'inactive' },
         startDate: { type: Date },
         expiryDate: { type: Date },
