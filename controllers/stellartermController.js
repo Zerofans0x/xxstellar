@@ -15,9 +15,13 @@ const saveOnboarding = asyncHandler(async (req, res) => {
         throw new Error('Please complete all telemetry fields and select a terminal tier.');
     }
 
-    // 2. Validate Selected Plan
-    const planKey = planTier.toUpperCase();
-    const selectedPlan = PLANS[planKey];
+    // 2. Validate Selected Plan (Handles hyphens, underscores, and case discrepancies)
+    const requestedTier = planTier.trim().toLowerCase();
+    const selectedPlan = Object.entries(PLANS).find(([key, p]) => 
+        key.toLowerCase() === requestedTier || 
+        key.toLowerCase().replace(/_/g, '-') === requestedTier ||
+        p.slug.toLowerCase() === requestedTier
+    )?.[1];
 
     if (!selectedPlan) {
         res.status(400); 
@@ -32,7 +36,9 @@ const saveOnboarding = asyncHandler(async (req, res) => {
 
     profile.experienceLevel = experienceLevel;
     profile.primaryGoal = primaryGoal;
+    profile.planTier = selectedPlan.slug; // Ensure the plan tier slug is saved to the profile
     profile.marketsOfInterest = Array.isArray(marketsOfInterest) ? marketsOfInterest : [marketsOfInterest];
+
     
     // Assign default Risk Tolerance based on experience level
     if (experienceLevel === 'Retail/Novice') profile.riskTolerance = 'Moderate';
