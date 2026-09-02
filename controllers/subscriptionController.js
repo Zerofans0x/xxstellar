@@ -69,8 +69,8 @@ const subscribeToPlanCrypto = asyncHandler(async (req, res) => {
         sendEmail({
             subject: `Complete your ${planName} Payment 🚀`, 
             send_to: user.email,
-            sent_from: "StellarTerm <hello@stellarterm.com>",
-            reply_to: "support@stellarterm.com",
+            sent_from: "StellarTerm <hello@mystellarterm.com>",
+            reply_to: "support@mystellarterm.com",
             templateKey: process.env.ZEPTO_TEMPLATE_CHECKOUT_INTENT,
             extraParams: { 
                 name: user.firstName, 
