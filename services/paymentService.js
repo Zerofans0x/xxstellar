@@ -14,7 +14,7 @@ const gateways = {
 // 2. Dynamic Provider Resolution
 const getActiveProvider = async (requestedProvider) => {
     const settings = await Settings.findOne({ singleton: 'main_settings' });
-    const defaultProvider = settings?.incomingPaymentProvider || 'nowpayments'; 
+    const defaultProvider = settings?.incomingPaymentProvider || 'paystack'; // Fallback to paystack if settings are missing
     
     // If frontend requests a specific gateway (multi-option UI) and we support it, use it. Otherwise fallback to admin default.
     if (requestedProvider && gateways[requestedProvider]) {
