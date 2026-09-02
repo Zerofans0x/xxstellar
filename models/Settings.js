@@ -8,7 +8,7 @@ incomingPaymentProvider: {
         type: String, 
         // ADD btcpay and nowpayments to the enum
         enum: ['paystack', 'nomba', 'stripe', 'btcpay', 'nowpayments'], 
-        default: 'nowpayments' 
+        default: 'paystack' 
     },
 
     // Controls which gateway handles OUTGOING transfers to creators

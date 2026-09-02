@@ -3,11 +3,12 @@
 const Settings = require('../models/Settings');
 const btcpayGateway = require('./gateway/btcpayGateway');
 const nowpaymentsGateway = require('./gateway/nowpaymentsGateway');
-
+const paystackGateway = require('./gateway/paystackGateway'); 
 // 1. Gateway Registry - Adding a new gateway in the future is just adding one line here.
 const gateways = {
     'btcpay': btcpayGateway,
-    'nowpayments': nowpaymentsGateway
+    'nowpayments': nowpaymentsGateway,
+    'paystack': paystackGateway
 };
 
 // 2. Dynamic Provider Resolution
