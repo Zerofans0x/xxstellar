@@ -316,7 +316,7 @@ const getMe = asyncHandler(async (req, res) => {
             avatarUrl: user.avatarUrl,
             role: user.role,
             isEmailVerified: user.isEmailVerified,
-            isOnboarded: isOnboarded
+            isOnboarded: user.isOnboarded
         });
     } else { res.status(404); throw new Error('User not found'); }
 });
