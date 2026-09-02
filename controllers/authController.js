@@ -26,8 +26,8 @@ const getCookieOptions = (customMaxAge) => {
         expires: new Date(Date.now() + (customMaxAge || 7 * 24 * 60 * 60 * 1000)),
         httpOnly: true,
         path: '/',
-        // Do not force a root domain on localhost, otherwise browsers drop cookies
-        domain: isProduction ? process.env.STELLARTERM_ROOT_DOMAIN : undefined,
+        // Only set domain in absolute production environments with a shared root domain
+        domain: (isProduction && process.env.STELLARTERM_ROOT_DOMAIN) ? process.env.STELLARTERM_ROOT_DOMAIN : undefined,
         secure: isProduction,
         sameSite: isProduction ? 'none' : 'lax',
     };
