@@ -4,10 +4,11 @@ const SettingsSchema = new mongoose.Schema({
     singleton: { type: String, default: 'main_settings', unique: true },
     
     // Controls which gateway handles NEW incoming payments (Checkout)
-    incomingPaymentProvider: { 
+incomingPaymentProvider: { 
         type: String, 
-        enum: ['paystack', 'nomba', 'stripe'], 
-        default: 'nomba' 
+        // ADD btcpay and nowpayments to the enum
+        enum: ['paystack', 'nomba', 'stripe', 'btcpay', 'nowpayments'], 
+        default: 'nowpayments' 
     },
 
     // Controls which gateway handles OUTGOING transfers to creators

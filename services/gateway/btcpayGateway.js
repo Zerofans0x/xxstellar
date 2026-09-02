@@ -1,4 +1,4 @@
-// File: services/gateway/btcpayGateway.js
+
 const axios = require('axios');
 
 const BTCPAY_BASE_URL = process.env.BTCPAY_SERVER_URL; 
@@ -38,7 +38,10 @@ const initializeCryptoInvoice = async (email, amount, currency = 'USD', orderId,
             { headers: getHeaders() }
         );
 
-        return response.data;
+        return {
+            id: response.data.id,
+            checkoutLink: response.data.checkoutLink
+        };
     } catch (error) {
         console.error('BTCPay Invoice Init Error:', error.response?.data || error.message);
         throw error;
@@ -51,7 +54,17 @@ const verifyCryptoInvoice = async (invoiceId) => {
             `${BTCPAY_BASE_URL}/api/v1/invoices/${invoiceId}`,
             { headers: getHeaders() }
         );
-        return response.data;
+        
+        const rawStatus = response.data.status; // BTCPay native status
+        
+        // Map to standard system statuses
+        let mappedStatus = 'Pending';
+        if (rawStatus === 'Settled') mappedStatus = 'Settled';
+        else if (rawStatus === 'Processing') mappedStatus = 'Processing';
+        else if (['Expired', 'Invalid'].includes(rawStatus)) mappedStatus = 'Expired';
+
+        // Standardize the return object to match NOWPayments
+        return { status: mappedStatus, raw: response.data };
     } catch (error) {
         console.error('BTCPay Verify Error:', error.response?.data || error.message);
         throw error;
